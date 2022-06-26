@@ -4,6 +4,7 @@ import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { CatalogueService } from '../catalogue.service';
 import { Product } from '../models/product.model';
 import { AuthenticationService } from '../services/authentication.service';
+import { CaddyService } from '../services/caddy.service';
 
 @Component({
   selector: 'app-products',
@@ -24,7 +25,8 @@ export class ProductsComponent implements OnInit {
   constructor(public catService: CatalogueService,
     public route: ActivatedRoute,
     private router: Router,
-    public authService:AuthenticationService) { }
+    public authService:AuthenticationService,
+    public cartService:CaddyService) { }
 
   ngOnInit(): void {
     let p1 = this.route.snapshot.params.p1;
@@ -109,8 +111,13 @@ export class ProductsComponent implements OnInit {
     this.router.navigateByUrl('product-details/'+url);
   }
   
-  onAddProductToCaddy(p){
-
+  onAddProductToCaddy(p:Product){
+    if(!this.authService.isAuthenticated){
+      this.router.navigateByUrl("/login");
+    }
+    else{
+      this.cartService.addProduct(p);
+    }
   }
 
 }
