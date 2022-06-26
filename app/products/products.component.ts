@@ -2,6 +2,7 @@ import { HttpEventType, HttpResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { CatalogueService } from '../catalogue.service';
+import { Product } from '../models/product.model';
 import { AuthenticationService } from '../services/authentication.service';
 
 @Component({
@@ -102,8 +103,14 @@ export class ProductsComponent implements OnInit {
     return this.currentTime;
   }
 
+
+  onProductDetails(p:Product){
+    let url = btoa(p._links.product.href)
+    this.router.navigateByUrl('product-details/'+url);
+  }
+  
   onAddProductToCaddy(p){
-    
+
   }
 
 }

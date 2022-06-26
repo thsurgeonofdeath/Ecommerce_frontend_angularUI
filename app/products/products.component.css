@@ -1,3 +1,7 @@
 .heighted{
     height: 350px;
 }
+
+.clickable{
+    cursor: pointer;
+}

@@ -5,7 +5,7 @@
             <div class="panel panel-default heighted">
                 <div class="panel-heading"> {{p.name}} </div>
                 <div class="panel-body">
-                    <img height="150" src="{{this.catService.host+'/photoProduct/'+p.id+'?ts='+getTS()}}"/>
+                    <img height="150" [src]="this.catService.host+'/photoProduct/'+p.id+'?ts='+getTS()" (click)="onProductDetails(p)" class="clickable"/>
                     <div *ngIf="this.authService.isAdmin()">
                         <button (click)="onEditPhoto(p)">
                           <span class="glyphicon glyphicon-edit"></span>
