@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router, RouterLink } from '@angular/router';
 import { CatalogueService } from './catalogue.service';
 
 @Component({
@@ -8,8 +9,9 @@ import { CatalogueService } from './catalogue.service';
 })
 export class AppComponent implements OnInit {
   public categories: any;
+  public currentCategory: any;
  
-  constructor(private catService:CatalogueService){}
+  constructor(private catService:CatalogueService, private router:Router){}
 
   ngOnInit(): void {
     this.getCategories();
@@ -24,6 +26,15 @@ export class AppComponent implements OnInit {
     })
   }
 
+  getProductsByCat(c: { id: string; }){
+    this.currentCategory = c;
+    this.router.navigateByUrl('/products/2/'+c.id);
+  }
+
+  onSelectedProducts(){
+    this.currentCategory = undefined;
+    this.router.navigateByUrl("/products/1/0");
+  }
 
   title = 'Ecommerce_Frontend';
 }

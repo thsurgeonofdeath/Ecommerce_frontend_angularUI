@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { CatalogueService } from '../catalogue.service';
 
 @Component({
@@ -9,18 +10,38 @@ import { CatalogueService } from '../catalogue.service';
 export class ProductsComponent implements OnInit {
   public products: any;
 
-  constructor(public catService:CatalogueService) { }
+  constructor(public catService: CatalogueService,
+    public route: ActivatedRoute,
+    private router: Router) { }
 
   ngOnInit(): void {
-    this.getProducts();
+    let p1 = this.route.snapshot.params.p1;
+    if (p1 == 1) {
+      this.getProducts("/products/search/selectedProducts");
+    }
+    this.router.events.subscribe((val) => {
+      if (val instanceof NavigationEnd) {
+        let url = val.url;
+        console.log(url);
+        let p1 = this.route.snapshot.params.p1;
+        if (p1 == 1) {
+          this.getProducts("/products/search/selectedProducts");
+        }
+        else if (p1 == 2) {
+          let idCat = this.route.snapshot.params.p2;
+          this.getProducts("/categories/" + idCat + "/products");
+        }
+      }
+    });
+
   }
-  getProducts() {
-    this.catService.getResource("/products/search/selectedProducts")
-    .subscribe(data=>{
-      this.products=data;
-    },error=>{
-      console.log(error);
-    })
+  getProducts(url: string) {
+    this.catService.getResource(url)
+      .subscribe(data => {
+        this.products = data;
+      }, error => {
+        console.log(error);
+      })
   }
 
 }
