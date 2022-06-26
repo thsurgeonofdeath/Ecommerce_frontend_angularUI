@@ -36,5 +36,16 @@ export class AppComponent implements OnInit {
     this.router.navigateByUrl("/products/1/0");
   }
 
+  onProductsPromo() {
+    this.currentCategory=undefined;
+    this.router.navigateByUrl("/products/3/0");
+  }
+
+  onProductsDispo() {
+    this.currentCategory=undefined;
+    this.router.navigateByUrl("/products/4/0");
+  }
+
+
   title = 'Ecommerce_Frontend';
 }

@@ -1,5 +1,7 @@
-import { HttpClient } from '@angular/common/http';
+import { FormStyle } from '@angular/common';
+import { HttpClient, HttpEvent, HttpRequest } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -10,5 +12,16 @@ export class CatalogueService {
 
   public getResource(url: string){
     return this.http.get(this.host+url);
+  }
+
+  uploadPhotoProduct(file: File, idProduct): Observable<HttpEvent<{}>> {
+    let formdata: FormData = new FormData();
+    formdata.append('file', file);
+    const req = new HttpRequest('POST', this.host+'/uploadPhoto/'+idProduct, formdata, {
+      reportProgress: true,
+      responseType: 'text'
+    });
+
+    return this.http.request(req);
   }
 }
