@@ -2,6 +2,7 @@ import { HttpEventType, HttpResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { CatalogueService } from '../catalogue.service';
+import { AuthenticationService } from '../services/authentication.service';
 
 @Component({
   selector: 'app-products',
@@ -21,7 +22,8 @@ export class ProductsComponent implements OnInit {
 
   constructor(public catService: CatalogueService,
     public route: ActivatedRoute,
-    private router: Router) { }
+    private router: Router,
+    public authService:AuthenticationService) { }
 
   ngOnInit(): void {
     let p1 = this.route.snapshot.params.p1;
@@ -94,6 +96,14 @@ export class ProductsComponent implements OnInit {
     })
 
     this.selectedFiles = undefined
+  }
+
+  getTS(){
+    return this.currentTime;
+  }
+
+  onAddProductToCaddy(p){
+    
   }
 
 }
