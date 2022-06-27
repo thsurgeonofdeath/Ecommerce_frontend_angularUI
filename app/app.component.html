@@ -13,12 +13,16 @@
           <li><a (click)="onProductsDispo()">Disponible</a></li>
         </ul>
       </li>
-      <li><a routerLink="/caddies">Cart</a></li>
+      <li><a routerLink="/caddy">Cart</a></li>
       <li><a href="#">Page 3</a></li>
     </ul>
     <ul class="nav navbar-nav pull-right">
       <li>
-        <a>{{cartService.getCaddy().name}} | {{cartService.getCaddy().items.size}}</a>
+        <a routerLink="/caddy">
+          <span class="badge">{{cartService.currentCaddyName}} :
+            {{cartService.getSize()}}</span>
+          <img class="img-circle img-thumbnail img-rounded" src="assets/images/caddy.png">
+        </a>
       </li>
       <a class="btn" (click)="onLogout()">
         <span class="glyphicon glyphicon-log-out"></span>

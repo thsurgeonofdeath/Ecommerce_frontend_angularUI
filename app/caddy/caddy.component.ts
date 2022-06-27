@@ -49,4 +49,5 @@ export class CaddyComponent implements OnInit {
     this.caddyService.currentCaddyName=c.name;
     this.caddy=this.caddyService.getCaddy();
   }
+  
 }

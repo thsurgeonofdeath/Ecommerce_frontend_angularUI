@@ -9,6 +9,8 @@ import { LoginComponent } from './login/login.component';
 import { FormsModule } from '@angular/forms';
 import { ProductDetailComponent } from './product-detail/product-detail.component';
 import { CaddyComponent } from './caddy/caddy.component';
+import { ClientComponent } from './client/client.component';
+import { PaymentComponent } from './payment/payment.component';
 
 @NgModule({
   declarations: [
@@ -17,6 +19,8 @@ import { CaddyComponent } from './caddy/caddy.component';
     LoginComponent,
     ProductDetailComponent,
     CaddyComponent,
+    ClientComponent,
+    PaymentComponent,
   ],
   imports: [
     BrowserModule,
